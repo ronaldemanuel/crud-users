@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  database:
+    image: postgres:13
+    container_name: adonis_db
+    environment:
+      POSTGRES_DB: ${PG_DB_NAME}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+    ports:
+      - 5432:${PG_PORT}
+
