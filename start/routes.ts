@@ -24,5 +24,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource('users', 'UsersController').apiOnly()
+Route.resource('users', 'UsersController')
+  .middleware({ index: ['auth'], show: ['auth'], update: ['auth'], destroy: ['auth'] })
+  .apiOnly()
 Route.post('/auth', 'AuthController.store')
