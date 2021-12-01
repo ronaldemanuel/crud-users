@@ -1,6 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
+import Media from './Media'
 
 export enum Visibility {
   PUBLIC = 'public',
@@ -26,6 +34,9 @@ export default class Post extends BaseModel {
 
   @column()
   public visibility: Visibility
+
+  @manyToMany(() => Media, { pivotTable: 'posts_medias' })
+  public media: ManyToMany<typeof Media>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
